@@ -7,7 +7,7 @@ namespace thienhungho\SupplierManagement\modules\SupplierBase\query;
  *
  * @see \thienhungho\SupplierManagement\modules\SupplierBase\query\Supplier
  */
-class SupplierQuery extends \yii\db\ActiveQuery
+class SupplierQuery extends \thienhungho\ActiveQuery\models\ActiveQuery
 {
     /*public function active()
     {
