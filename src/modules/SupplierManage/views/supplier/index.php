@@ -4,7 +4,7 @@
 
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-use kartik\grid\GridView;
+use thienhungho\Widgets\models\GridView;
 use yii\helpers\Html;
 
 $this->title = Yii::t('app', 'Supplier');
@@ -35,7 +35,7 @@ $this->registerJs($search);
 <div class="supplier-index">
     <?php
     $gridColumn = [
-        ['class' => 'yii\grid\SerialColumn'],
+        ['class' => '\kartik\grid\SerialColumn'],
         grid_checkbox_column(),
         [
             'class'         => 'kartik\grid\ExpandRowColumn',
@@ -54,7 +54,7 @@ $this->registerJs($search);
             'visible'   => false,
         ],
         [
-            'class'     => \yii\grid\DataColumn::className(),
+            'class'     => \kartik\grid\DataColumn::className(),
             'format'    => 'raw',
             'attribute' => 'avatar',
             'value'     => function($model, $key, $index, $column) {
@@ -65,6 +65,7 @@ $this->registerJs($search);
                     'target'    => '_blank',
                 ]);
             },
+            'vAlign'    => GridView::ALIGN_MIDDLE,
         ],
         [
             'attribute'           => 'user_id',
@@ -77,7 +78,7 @@ $this->registerJs($search);
                 }
             },
             'filterType'          => GridView::FILTER_SELECT2,
-            'filter'              => \yii\helpers\ArrayHelper::map(\BaseApp\ums\modules\UserBase\User::find()->asArray()->all(), 'id', 'username'),
+            'filter'              => \yii\helpers\ArrayHelper::map(\thienhungho\UserManagement\models\User::find()->asArray()->all(), 'id', 'username'),
             'filterWidgetOptions' => [
                 'pluginOptions' => ['allowClear' => true],
             ],
@@ -85,10 +86,21 @@ $this->registerJs($search);
                 'placeholder' => t('app', 'User'),
                 'id'          => 'grid-employee-search-user_id',
             ],
+            'vAlign'              => GridView::ALIGN_MIDDLE,
         ],
-        'name',
-        'phone',
-        'email:email',
+        [
+            'attribute' => 'name',
+            'vAlign'    => GridView::ALIGN_MIDDLE,
+        ],
+        [
+            'attribute' => 'phone',
+            'vAlign'    => GridView::ALIGN_MIDDLE,
+        ],
+        [
+            'attribute' => 'email',
+            'format'    => 'email',
+            'vAlign'    => GridView::ALIGN_MIDDLE,
+        ],
         //        'website',
         //        'birth_date',
         //        'gender',
@@ -96,7 +108,10 @@ $this->registerJs($search);
         //        'vat_number',
         grid_language_column(),
         //        'address:ntext',
-        'country',
+        [
+            'attribute' => 'country',
+            'vAlign'    => GridView::ALIGN_MIDDLE,
+        ],
         //        'city',
         //        'state',
         //        'zip_code',
@@ -136,6 +151,7 @@ $this->registerJs($search);
                 'placeholder' => t('app', 'Status'),
                 'id'          => 'grid-search-status',
             ],
+            'vAlign'    => GridView::ALIGN_MIDDLE,
         ],
         [
             'format'              => 'raw',
@@ -165,12 +181,12 @@ $this->registerJs($search);
                 'placeholder' => t('app', 'Type'),
                 'id'          => 'grid-search-type',
             ],
+            'vAlign'    => GridView::ALIGN_MIDDLE,
         ],
         //        'currency',
     ];
     $gridColumn[] = grid_view_default_active_column_cofig();
-    ?>
-    <?= GridView::widget([
+    ?> <?= GridView::widget([
         'dataProvider'   => $dataProvider,
         'filterModel'    => $searchModel,
         'columns'        => $gridColumn,

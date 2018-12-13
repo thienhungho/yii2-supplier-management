@@ -135,7 +135,7 @@ class Supplier extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(\BaseApp\ums\modules\UserBase\User::className(), ['id' => 'user_id']);
+        return $this->hasOne(\thienhungho\UserManagement\models\User::className(), ['id' => 'user_id']);
     }
 
 
